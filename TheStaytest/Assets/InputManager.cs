@@ -7,6 +7,7 @@ public class InputManager : MonoBehaviour
     PlayerControls playerControls;
     AnimatorManager animatorManager;
 
+    [SerializeField] KeyCode runCode = KeyCode.LeftShift;
     public Vector2 movementInput;
     private float moveAmount;
     public float verticalInput;
@@ -44,9 +45,12 @@ public class InputManager : MonoBehaviour
 
     private void HandleMovementInput()
     {
-        verticalInput = movementInput.y;
+        var run = 1;
+        if (Input.GetKey(runCode)) run = 2;
+
+        verticalInput = movementInput.y * run;
         horizontalInput = movementInput.x;
-        moveAmount = Mathf.Clamp01(Mathf.Abs(horizontalInput) + Mathf.Abs(verticalInput));
-        animatorManager.UpdateAnimatorValues(0, moveAmount);
+        //moveAmount = Mathf.Clamp01(Mathf.Abs(horizontalInput) + Mathf.Abs(verticalInput));
+        animatorManager.UpdateAnimatorValues(horizontalInput, verticalInput);
     }
 }
