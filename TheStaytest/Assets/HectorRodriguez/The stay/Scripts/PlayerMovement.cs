@@ -30,8 +30,6 @@ public class PlayerMovement : MonoBehaviour
 
     private void HandleMovement()
     {
-        print("VERTICAL__ " + inputManager.verticalInput);
-
         moveDirection = cameraObject.forward * inputManager.verticalInput;
         moveDirection = moveDirection + cameraObject.right * inputManager.horizontalInput;
         moveDirection.Normalize();
